@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Coffee Masters</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <nav class="nav-bar">
+            <ul>
+                <li>
+
+                    <div class="nav-items">
+                        <a href="localhost:3000">
+                            <img src="./assets/coffee_masters_logo.png" alt="Coffee Masters Logo" class="logo" />
+                            <span>Coffee Masters</span>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page">
+        <section class="order box">
+            <h2 class="box-title">ITEMS</h2>
+            <ul class="order-list">
+                <li class="order-item">
+                    <div class="item-quantity">1x</div>
+                    <div class="item-title">Latte</div>
+                    <div class="item-price">£3.45</div>
+                    <ul class="item-option-list">
+                        <li class="item-option">Soy Milk</li>
+                    </ul>
+                </li>
+                <li class="order-item">
+                    <div class="item-quantity">2x</div>
+                    <div class="item-title">Cappucino</div>
+                    <div class="item-price">£3.85</div>
+                    <ul class="item-option-list">
+                        <li class="item-option">Lite Milk</li>
+                        <li class="item-option">Double espresso</li>
+                    </ul>
+                </li>
+                <li class="order-item">
+                    <div class="item-quantity">2x</div>
+                    <div class="item-title">Croissant</div>
+                    <div class="item-price">£2.45</div>
+                    <ul class="item-option-list">
+                        <li class="item-option">Butter</li>
+                        <li class="item-option">Almonds</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section class="payment">
+            <div class="name-box box">
+                <h2 class="box-title">NAME</h2>
+                <div class="input-group">
+                    <label for="name-input" class="input-label">Name</label>
+                    <input id="name-input" class="input-field" type="text" placeholder="Owen">
+                </div>
+            </div>
+
+            <div class="payment-box box">
+                <h2 class="box-title">PAYMENT</h2>
+                <ul>
+                    <li>
+                        <div class="input-group">
+                            <label for="card-type-input" class="input-label">Card Type</label>
+                            <select id="card-type-input" class="input-field">
+                                <option value="visa">Visa</option>
+                                <option value="mastercard">Mastercard</option>
+                                <option value="amex">American Express</option>
+                            </select>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="input-group">
+                            <label for="card-number-input" class="input-label">Card Number</label>
+                            <input id="card-number-input" class="input-field" type="text" placeholder="5355 7777 XXXX">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="input-group">
+                            <label for=" ccv-input" class="input-label">CCV Number</label>
+                            <input id="ccv-input" class="input-field short-input" type="text" placeholder="07XX">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="input-group">
+                            <label for="expiry-date-input" class="input-label">Expiry Date</label>
+                            <input id="expiry-date-input" class="input-field short-input" type="text" placeholder="MM/YYYY">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="summary">
+            <div class="total">
+                <ul>
+                    <li>
+                        <span class="total-desc">Subtotal</span>
+                        <span class="cost">£9.65</span>
+                    </li>
+                    <li>
+                        <span class="total-desc">Discount</span>
+                        <span class="cost">£0.00</span>
+                    </li>
+                    <li id="total-cost">
+                        <span class="total-desc">Total</span>
+                        <span class="cost">£9.65</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="place-order">
+                <button>Place Order</button>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
