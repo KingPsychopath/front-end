@@ -87,3 +87,4 @@ document.querySelector("#backspace").addEventListener("click", () => {
 
 let stackDisplay = document.querySelector("#stackDisplay");
 stackDisplay.scrollRight = stackDisplay.scrollWidth;
+
