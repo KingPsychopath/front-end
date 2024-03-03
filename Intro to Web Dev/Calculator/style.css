@@ -1,0 +1,120 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 100 50px;
+  position: absolute;
+  top: 50px;
+  right: 50px;
+}
+
+.calculator {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 10px;
+  background: #f4f4f4;
+  border-radius: 5px;
+  width: 50vw;
+  height: 70vh;
+}
+
+.calculator .display {
+  grid-column: span 4;
+  background: #000000;
+  border: 1px solid #ccc;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.display #stackDisplay {
+  overflow: auto;
+  width: 15%;
+  align-self: flex-start; /* aligns to the left */
+  border-style: none;
+  outline: none;
+  background-color: transparent;
+  text-align: left;
+  color: white;
+  font-size: 2em;
+}
+
+.display #display {
+  align-self: flex-end; /* aligns to the right */
+  border-style: none;
+  outline: none;
+  background-color: transparent;
+  text-align: right;
+  color: white;
+  font-size: 3.25em;
+}
+
+.calculator .buttons {
+  grid-column: span 4;
+  display: grid;
+}
+
+.calculator button {
+  padding: 10px;
+  font-size: 1.5em;
+  cursor: pointer;
+  background: rgb(0, 0, 0, 0);
+  border: 1px solid #ccc;
+  transition: background 0.3s ease;
+}
+
+.calculator button:hover {
+  background: rgb(0, 0, 0, 0.1);
+}
+
+.calculator .row:first-child button {
+  background-color: rgb(246, 202, 148);
+  color: white;
+  font-weight: bold;
+}
+
+.calculator .row:first-child button:hover {
+  background-color: rgb(224, 168, 98);
+}
+
+.row button:first-child {
+  background-color: rgb(246, 202, 148);
+  color: white;
+  font-weight: bold;
+}
+
+.row button:first-child:hover {
+  background-color: rgb(224, 168, 98);
+}
+
+.calculator .buttons button:active {
+  transform: scale(0.9);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@keyframes scaleAnimation {
+  0%,
+  100% {
+    transform: scale(1);
+  } /* Start and end at normal size */
+  50% {
+    transform: scale(0.95);
+  } /* Scale up to 1.2x at the halfway point */
+}
+
+.animate {
+  animation-name: scaleAnimation;
+  animation-duration: 0.5s; /* Adjust as needed */
+}
