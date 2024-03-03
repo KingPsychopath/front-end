@@ -2,6 +2,8 @@
 
 This is a simple calculator that can perform basic arithmetic operations such as addition, subtraction, multiplication, and division.
 
+It uses a `Stack` to keep track of the operations and numbers entered by the user.
+
 It was built to look similar to the default calculator app on iOS.
 
 # Demo
