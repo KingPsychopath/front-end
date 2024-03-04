@@ -1,6 +1,18 @@
-window.addEventListener("focus", () => {
-  refocusInput();
-});
+function cursorResetSetup() {
+  window.addEventListener("focus", () => {
+    refocusInput();
+  });
+  window.addEventListener("click", () => {
+    refocusInput();
+  });
+
+  const container = document.querySelector(".container");
+  if (container) {
+    container.addEventListener("click", () => {
+      refocusInput();
+    });
+  }
+}
 
 function validate() {
   const inputs = document.querySelectorAll(".cell-input");
@@ -25,8 +37,8 @@ function submitRow() {
   //alert(`Parent Element: ${currentRow.className}`);
 
   // Validation Logic Here
+  const inputs = getInputs();
 
-  let inputs = document.querySelectorAll(".cell-input:enabled");
   // Set the "disabled" attribute of each element to true
   inputs.forEach((input) => {
     input.setAttribute("disabled", true);
@@ -37,7 +49,7 @@ function submitRow() {
 
 function enableNextRow(previousRowObject) {
   let nextRow = previousRowObject.nextElementSibling;
-  let inputs = nextRow.querySelectorAll(".cell-input:disabled");
+  const inputs = getInputs(false, nextRow);
   // Set the "disabled" attribute of each element to true
   inputs.forEach((input) => {
     input.removeAttribute("disabled");
@@ -46,31 +58,42 @@ function enableNextRow(previousRowObject) {
   refocusInput();
 }
 
-function refocusInput() {
-  // Selects the last input if it exists, otherwise selects the first input
-  const inputs = Array.from(document.querySelectorAll(".cell-input:enabled"));
-  const firstEmptyInput = inputs.find((input) => input.value === "");
+function getInputs(enabled = true, element = window.document) {
+  switch (enabled) {
+    case true:
+      return Array.from(element.querySelectorAll(".cell-input:enabled"));
+    case false:
+      return Array.from(element.querySelectorAll(".cell-input:disabled"));
+  }
+}
 
-  //const lastFilledInput = inputs.reverse().find((input) => input.value !== "");
+/**
+ * Refocuses the input element based on its value.
+ * If there is an empty input, it will be focused.
+ * If all inputs are filled, the last filled input will be focused and the selection highlight will be hidden.
+ */
+function refocusInput() {
+  const inputs = getInputs();
+  const firstEmptyInput = inputs.find((input) => input.value === "");
+  const lastFilledInput = inputs.reverse().find((input) => input.value !== "");
 
   if (firstEmptyInput) {
     firstEmptyInput.focus();
-  } 
-
-  /*if (lastFilledInput) {
+  } else {
     lastFilledInput.focus();
     //Hides the selection highlight
     lastFilledInput.setSelectionRange(
       lastFilledInput.value.length,
       lastFilledInput.value.length
     );
-  }*/
+  }
 }
 
 function renderInput() {
   let timer;
+  const inputs = getInputs();
 
-  document.querySelectorAll(".cell-input:enabled").forEach((input) => {
+  inputs.forEach((input) => {
     input.addEventListener("input", (e) => {
       if (isLetter(e.data)) {
         input.value = e.data.toUpperCase();
@@ -120,6 +143,7 @@ function renderInput() {
 function init() {
   renderInput();
   refocusInput();
+  cursorResetSetup();
 }
 
 init();
