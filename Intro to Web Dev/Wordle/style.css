@@ -1,5 +1,3 @@
-
-
 h1 {
   font-family: "Roboto", "Betany Bold Condensed", "Clear Sans", "Helvetica Neue",
     Arial, sans-serif;
@@ -57,10 +55,6 @@ h1 {
   caret-color: auto;
 }
 
-.cell input:focus {
-  outline: none;
-}
-
 @keyframes input-focus {
   0% {
     transform: scale(1);
@@ -76,4 +70,38 @@ h1 {
 .cell input:focus {
   animation: input-focus 0.5s ease-in-out;
   outline: none;
+}
+
+/* flashes red border and then fades back to gray */
+@keyframes flash {
+  0% {
+    border-color: red;
+  }
+  100% {
+    border-color: #d8d8d8;
+  }
+}
+
+.cell input:invalid {
+  animation: flash 0.5s ease-in-out;
+}
+
+/* Animations */
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  /* ... more frames ... */
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+.shake-animation {
+  animation: shake 0.5s; /* Adjust duration as needed */
+  animation-iteration-count: 1; /* Number of times the animation should play */
 }

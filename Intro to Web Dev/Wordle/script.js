@@ -1,21 +1,5 @@
-function cursorResetSetup() {
-  window.addEventListener("focus", () => {
-    refocusInput();
-  });
-  window.addEventListener("click", () => {
-    refocusInput();
-  });
-
-  const container = document.querySelector(".container");
-  if (container) {
-    container.addEventListener("click", () => {
-      refocusInput();
-    });
-  }
-}
-
 function validate() {
-  const inputs = document.querySelectorAll(".cell-input");
+  const inputs = getInputs();
   let isValid = true;
   inputs.forEach((input) => {
     if (input.value === "") {
@@ -28,25 +12,76 @@ function validate() {
   return isValid;
 }
 
+function getWord() {
+  const inputs = getInputs();
+  return inputs.map((input) => input.value).join("");
+}
+
+function isValidWord(word) {
+  console.log("API call to check if the word is valid");
+}
+
+function submitWord() {
+  const isValid = validate();
+  if (!isValid) {
+    alert("Please fill in all the letters in the row.");
+    return;
+  }
+  return isValid;
+  //const word = getWord();
+  //isValidWord(word);
+}
+
+/**
+ * Checks if a given character is a letter.
+ *
+ * @param {string} letter - The character to check.
+ * @returns {boolean} - Returns true if the character is a letter, otherwise false.
+ */
 function isLetter(letter) {
   return /^[a-zA-Z]$/.test(letter);
 }
 
+/**
+ * Submits the current row and disables it,
+ * calls program to perform validation and enables the next row.
+ */
 function submitRow() {
-  const currentRow = document.activeElement.parentElement.parentElement;
-  //alert(`Parent Element: ${currentRow.className}`);
+  // Store the current row before disabling it (to enable the next row later)
+  const currentRow = getCurrentRow();
 
-  // Validation Logic Here
-  const inputs = getInputs();
+  // Validation Logic - Check if the current row is valid
+  if (!submitWord()) {
+    return;
+  }
 
   // Set the "disabled" attribute of each element to true
-  inputs.forEach((input) => {
-    input.setAttribute("disabled", true);
-  });
+  disableCurrentRow();
 
+  // Enable the next row and set the focus to the first input
   enableNextRow(currentRow);
 }
 
+function getCurrentRow() {
+  //   const currentRow = document.activeElement.parentElement.parentElement; //deprecated (requires focus on input field to get row)
+  const activeRow = document.querySelector(".row:not(:has(input:disabled))");
+  return activeRow;
+}
+
+/**
+ * Disables all inputs in the current row.
+ */
+function disableCurrentRow() {
+  const inputs = getInputs();
+  inputs.forEach((input) => {
+    input.setAttribute("disabled", true);
+  });
+}
+
+/**
+ * Enables the next row of inputs by removing the "disabled" attribute from each element.
+ * @param {HTMLElement} previousRowObject - The previous row object from which to determine the next row.
+ */
 function enableNextRow(previousRowObject) {
   let nextRow = previousRowObject.nextElementSibling;
   const inputs = getInputs(false, nextRow);
@@ -54,10 +89,17 @@ function enableNextRow(previousRowObject) {
   inputs.forEach((input) => {
     input.removeAttribute("disabled");
   });
-  renderInput();
+  registerInputs();
   refocusInput();
 }
 
+/**
+ * Retrieves a list of input elements based on the specified enabled state.
+ *
+ * @param {boolean} enabled - Determines whether to retrieve enabled or disabled input elements.
+ * @param {HTMLElement} [element=window.document] - The element to search within. Defaults to the entire document.
+ * @returns {Array<HTMLElement>} - An array of input elements matching the specified enabled state.
+ */
 function getInputs(enabled = true, element = window.document) {
   switch (enabled) {
     case true:
@@ -89,7 +131,7 @@ function refocusInput() {
   }
 }
 
-function renderInput() {
+function registerInputs() {
   let timer;
   const inputs = getInputs();
 
@@ -140,10 +182,33 @@ function renderInput() {
   });
 }
 
+/**
+ * Registers event listeners to reset the cursor focus on the input field.
+ */
+function registerCursorResetListener() {
+  window.addEventListener("focus", () => {
+    refocusInput();
+  });
+  window.addEventListener("click", () => {
+    refocusInput();
+  });
+
+  const container = document.querySelector(".container");
+  if (container) {
+    container.addEventListener("click", () => {
+      refocusInput();
+    });
+  }
+}
+
+/**
+ * Initializes the application.
+ * This function registers the input, refocuses the input field, and sets up the cursor reset.
+ */
 function init() {
-  renderInput();
+  registerInputs();
   refocusInput();
-  cursorResetSetup();
+  registerCursorResetListener();
 }
 
 init();
