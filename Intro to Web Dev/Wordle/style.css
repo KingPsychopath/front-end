@@ -1,0 +1,69 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px; /* adjust as needed */
+  border: 1px solid #e7e6e6;
+  padding: 10px;
+  margin: 20px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 5px; /* adjust as needed */
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px; /* adjust as needed */
+  height: 50px; /* adjust as needed */
+  flex-shrink: 0;
+  border: 2px solid #d8d8d8;
+  border-radius: 5px; /* optional, for rounded corners */
+}
+
+.cell-input {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  border: none;
+  background: none;
+  font-family: "Roboto", monospace;
+  font-size: 2em; /* adjust as needed */
+  font-weight: bold;
+}
+
+.cell input {
+  caret-color: auto;
+}
+
+.cell input:focus {
+  outline: none;
+}
+
+@keyframes input-focus {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.cell input:focus {
+  animation: input-focus 0.5s ease-in-out;
+  outline: none;
+}
