@@ -2,7 +2,7 @@
 
 A simple word game where you have to guess a word in 6 tries.
 
-# Notable Accomplishments
+# Learned
 
 - `input.select()` for selecting the text in an input field, highlights the text which I did not want. So I used `input.setSelectionRange(len(input), len(input))` to set the cursor to the end of the input field, when refocusing an input field that already contains text.
 

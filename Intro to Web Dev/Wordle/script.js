@@ -1,17 +1,34 @@
 function validate() {
   const inputs = getInputs();
+  const row = getCurrentRow();
+  let isValid = true;
+
+  if (!areInputsFieldsFilled(inputs)) {
+    isValid = false;
+    shakeRow(row);
+  }
+  return isValid;
+}
+
+function shakeRow(row) {
+  row.classList.add("shake-animation");
+  setTimeout(() => {
+    row.classList.remove("shake-animation");
+  }, 600);
+}
+
+function areInputsFieldsFilled(inputs) {
   let isValid = true;
   inputs.forEach((input) => {
     if (input.value === "") {
       isValid = false;
-      input.classList.add("invalid");
+      /*   input.classList.add("invalid");
     } else {
-      input.classList.remove("invalid");
+      input.classList.remove("invalid");*/
     }
   });
   return isValid;
 }
-
 function getWord() {
   const inputs = getInputs();
   return inputs.map((input) => input.value).join("");
@@ -24,10 +41,11 @@ function isValidWord(word) {
 function submitWord() {
   const isValid = validate();
   if (!isValid) {
-    alert("Please fill in all the letters in the row.");
+    //alert("Please fill in all the letters in the row.");
+
     return;
   }
-  return isValid;
+  return true;
   //const word = getWord();
   //isValidWord(word);
 }
@@ -55,6 +73,11 @@ function submitRow() {
     return;
   }
 
+  // Flip the tiles in the row
+  flipRow(currentRow);
+
+  // Add colour to the row
+
   // Set the "disabled" attribute of each element to true
   disableCurrentRow();
 
@@ -77,6 +100,22 @@ function disableCurrentRow() {
     input.setAttribute("disabled", true);
   });
 }
+
+function flipRow(row) {
+    const tiles = Array.from(row.children); // Assuming each tile is a direct child of the row
+    tiles.forEach((tile, index) => {
+      setTimeout(() => {
+        tile.classList.add("flip-in-animation");
+        tile.addEventListener("animationend", () => {
+          tile.classList.remove("flip-in-animation");
+          tile.classList.add("flip-out-animation");
+          tile.addEventListener("animationend", () => {
+            tile.classList.remove("flip-out-animation");
+          });
+        });
+      }, index * 600); // Delay before the flip animation starts
+    });
+  }
 
 /**
  * Enables the next row of inputs by removing the "disabled" attribute from each element.
@@ -141,6 +180,12 @@ function registerInputs() {
         input.value = e.data.toUpperCase();
         const nextInput =
           input.parentElement.nextElementSibling?.querySelector(".cell-input");
+
+          input.parentElement.classList.add("tile-pop-animation");
+        setTimeout(() => {
+          input.parentElement.classList.remove("tile-pop-animation");
+        }, 600);
+
         if (nextInput) {
           nextInput.focus();
         }
@@ -201,14 +246,42 @@ function registerCursorResetListener() {
   }
 }
 
+async function getWordOfTheDay() {
+  // Call API to get the word of the day
+  fetch("https://words.dev-apis.com/word-of-the-day")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      // Use the data here
+      wordOfTheDay = data.word;
+      return;
+    })
+    .catch((error) => {
+      console.error(
+        "There has been a problem with your fetch operation:",
+        error
+      );
+    });
+}
+
 /**
  * Initializes the application.
  * This function registers the input, refocuses the input field, and sets up the cursor reset.
  */
+let wordOfTheDay = "apple";
 function init() {
   registerInputs();
   refocusInput();
   registerCursorResetListener();
+  getWordOfTheDay();
+  /*setTimeout(() => {
+    alert(wordOfTheDay);
+  }, 2000);*/
 }
 
 init();
