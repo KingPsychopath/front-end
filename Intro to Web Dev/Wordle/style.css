@@ -5,6 +5,10 @@ h1 {
   margin-bottom: 0;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 .title-bar {
   margin-top: 20px;
   border-bottom: 2px solid rgb(156, 117, 110);
@@ -193,99 +197,74 @@ h1 {
   }
 }
 
-@keyframes liftItem
-{
-	0%,20%
-{
-	transform:translateY(0)
-}
-	40%
-{
-	transform:translateY(-30px)
-}
-	50%
-{
-	transform:translateY(5px)
-}
-	60%
-{
-	transform:translateY(-15px)
-}
-	80%
-{
-	transform:translateY(2px)
-}
-	100%
-{
-	transform:translateY(0)
+@keyframes liftItem {
+  0%,
+  20% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+  80% {
+    transform: translateY(2px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
+.lift-item-animation {
+  animation: liftItem 1s ease-in-out;
+  animation-iteration-count: 1;
 }
 
-.lift-item-animation
-{
-  animation:liftItem 1s ease-in-out;
-  animation-iteration-count:1;
+@keyframes tilePop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+.tile-pop-animation {
+  animation-name: tilePop;
+  animation-duration: 100ms;
 }
 
-
-	@keyframes tilePop
-{
-	from
-{
-	transform:scale(0.8);
-	opacity:0
-}
-	40%
-{
-	transform:scale(1.1);
-	opacity:1
+@keyframes flipIn {
+  0% {
+    transform: rotateX(0);
+  }
+  100% {
+    transform: rotateX(-90deg);
+  }
 }
 
-}
-.tile-pop-animation
-{
-	animation-name:tilePop;
-	animation-duration:100ms
-}
-
-
-	@keyframes flipIn
-{
-	0%
-{
-	transform:rotateX(0)
-}
-	100%
-{
-	transform:rotateX(-90deg)
+.flip-in-animation {
+  animation-name: flipIn;
+  animation-duration: 250ms;
+  animation-timing-function: ease-in;
 }
 
+@keyframes flipOut {
+  0% {
+    transform: rotateX(-90deg);
+  }
+  100% {
+    transform: rotateX(0);
+  }
 }
 
-.flip-in-animation
-{
-	animation-name:flipIn;
-	animation-duration:250ms;
-	animation-timing-function:ease-in
-}
-
-
-	@keyframes flipOut
-{
-	0%
-{
-	transform:rotateX(-90deg)
-}
-	100%
-{
-	transform:rotateX(0)
-}
-}
-
-.flip-out-animation
-{
-	animation-name:flipOut;
-	animation-duration:250ms;
-	animation-timing-function:ease-in
+.flip-out-animation {
+  animation-name: flipOut;
+  animation-duration: 250ms;
+  animation-timing-function: ease-in;
 }

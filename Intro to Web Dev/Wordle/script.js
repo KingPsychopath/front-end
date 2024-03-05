@@ -102,20 +102,20 @@ function disableCurrentRow() {
 }
 
 function flipRow(row) {
-    const tiles = Array.from(row.children); // Assuming each tile is a direct child of the row
-    tiles.forEach((tile, index) => {
-      setTimeout(() => {
-        tile.classList.add("flip-in-animation");
+  const tiles = Array.from(row.children); // Assuming each tile is a direct child of the row
+  tiles.forEach((tile, index) => {
+    setTimeout(() => {
+      tile.classList.add("flip-in-animation");
+      tile.addEventListener("animationend", () => {
+        tile.classList.remove("flip-in-animation");
+        tile.classList.add("flip-out-animation");
         tile.addEventListener("animationend", () => {
-          tile.classList.remove("flip-in-animation");
-          tile.classList.add("flip-out-animation");
-          tile.addEventListener("animationend", () => {
-            tile.classList.remove("flip-out-animation");
-          });
+          tile.classList.remove("flip-out-animation");
         });
-      }, index * 600); // Delay before the flip animation starts
-    });
-  }
+      });
+    }, index * 600); // Delay before the flip animation starts
+  });
+}
 
 /**
  * Enables the next row of inputs by removing the "disabled" attribute from each element.
@@ -181,7 +181,7 @@ function registerInputListeners() {
         const nextInput =
           input.parentElement.nextElementSibling?.querySelector(".cell-input");
 
-          input.parentElement.classList.add("tile-pop-animation");
+        input.parentElement.classList.add("tile-pop-animation");
         setTimeout(() => {
           input.parentElement.classList.remove("tile-pop-animation");
         }, 600);
@@ -258,7 +258,9 @@ async function getWordOfTheDay() {
     .then((data) => {
       console.log(data);
       // Use the data here
-      wordOfTheDay = data.word;
+      wordOfTheDay = data.word.toUpperCase();
+      console.log(wordOfTheDay);
+
       return;
     })
     .catch((error) => {
@@ -267,6 +269,22 @@ async function getWordOfTheDay() {
         error
       );
     });
+}
+
+async function getWordOfTheDayv2() {
+    try {
+        const response = await fetch("https://words.dev-apis.com/word-of-the-day");
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        console.log(data);
+        // Use the data here
+        wordOfTheDay = data.word.toUpperCase();
+        console.log(wordOfTheDay);
+    } catch (error) {
+        console.error("There has been a problem with your fetch operation:", error);
+    }
 }
 
 /**
