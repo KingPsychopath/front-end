@@ -128,7 +128,7 @@ function enableNextRow(previousRowObject) {
   inputs.forEach((input) => {
     input.removeAttribute("disabled");
   });
-  registerInputs();
+  registerInputListeners();
   refocusInput();
 }
 
@@ -170,7 +170,7 @@ function refocusInput() {
   }
 }
 
-function registerInputs() {
+function registerInputListeners() {
   let timer;
   const inputs = getInputs();
 
@@ -275,7 +275,7 @@ async function getWordOfTheDay() {
  */
 let wordOfTheDay = "apple";
 function init() {
-  registerInputs();
+  registerInputListeners();
   refocusInput();
   registerCursorResetListener();
   getWordOfTheDay();
