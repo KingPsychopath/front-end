@@ -103,7 +103,7 @@ async function submitRow() {
   const currentRow = getCurrentRow();
 
   // Validation Logic - Check if the current row is valid
-  if (!await validate()) {
+  if (!(await validate())) {
     return;
   }
 
@@ -315,18 +315,26 @@ async function getWordOfTheDayv2() {
     const data = await response.json();
     console.log(data);
     // Use the data here
-    wordOfTheDay = data.word.toUpperCase();
-    console.log(wordOfTheDay);
-    setLoading(false);
+    return data.word.toUpperCase();
   } catch (error) {
     console.error("There has been a problem with your fetch operation:", error);
   }
 }
 
+/**
+ * Sets the loading state of the application. (Only used for false as loading in on by default)
+ * @param {boolean} isLoadingBool - A boolean value indicating whether the application is in a loading state or not.
+ */
 function setLoading(isLoadingBool) {
+  const infoBar = document.querySelector(".info-bar");
+  const loader = document.querySelector(".loader");
   console.log("Loading: ", isLoadingBool);
-  //document.querySelector(".loader").style.display = isLoading ? "block" : "none";
-  document.querySelector(".loader").classList.toggle("hidden", !isLoadingBool);
+  infoBar.classList.add("fade-out-animation");
+  infoBar.addEventListener("animationend", () => {
+    infoBar.classList.remove("fade-out-animation");
+    loader.classList.toggle("hidden", !isLoadingBool);
+
+  });
 }
 
 /**
@@ -334,14 +342,14 @@ function setLoading(isLoadingBool) {
  * This function registers the input, refocuses the input field, and sets up the cursor reset.
  */
 let wordOfTheDay = "apple";
-function init() {
+async function init() {
   registerInputListeners();
   refocusInput();
   registerCursorResetListener();
-  getWordOfTheDay();
-  /*setTimeout(() => {
-    alert(wordOfTheDay);
-  }, 2000);*/
+
+  wordOfTheDay = await getWordOfTheDayv2();
+  setLoading(false);
+  console.log(wordOfTheDay);
 }
 
 init();

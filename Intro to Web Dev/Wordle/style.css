@@ -153,6 +153,20 @@ h1 {
   animation-iteration-count: 1; /* Number of times the animation should play */
 }
 
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.fade-out-animation {
+  animation: fadeOut 1s; /* Adjust duration as needed */
+  animation-iteration-count: 1; /* Number of times the animation should play */
+}
+
 @keyframes slideAndFade {
   0% {
     opacity: 0;
@@ -277,3 +291,4 @@ h1 {
   animation-duration: 250ms;
   animation-timing-function: ease-in;
 }
+
