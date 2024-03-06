@@ -1,13 +1,21 @@
-function validate() {
+async function validate() {
   const inputs = getInputs();
   const row = getCurrentRow();
-  let isValid = true;
+  const word = getWord();
 
   if (!areInputsFieldsFilled(inputs)) {
-    isValid = false;
     shakeRow(row);
+    console.log("Please fill in all the letters in the row.");
+    return false;
   }
-  return isValid;
+
+  const isWordValid = await isValidWordv2(word);
+  if (!isWordValid) {
+    shakeRow(row);
+    console.log("This word is not lexically correct. Please try again.");
+    return false;
+  }
+  return true;
 }
 
 function shakeRow(row) {
@@ -34,20 +42,46 @@ function getWord() {
   return inputs.map((input) => input.value).join("");
 }
 
-function isValidWord(word) {
-  console.log("API call to check if the word is valid");
+async function isValidWord(word) {
+  console.log(`API call to check if the ${word} is valid`);
+  // Is this a valid 5 letter word?
+  const res = await fetch("https://words.dev-apis.com/word/validate-word", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ word: word }),
+  });
+
+  const resObj = await res.json();
+  return resObj.valid;
 }
 
-function submitWord() {
-  const isValid = validate();
-  if (!isValid) {
-    //alert("Please fill in all the letters in the row.");
+async function isValidWordv2(word) {
+  try {
+    const res = await fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-    return;
+    if (res.status === 404) {
+      console.error("404 Error! No Definitions Found.");
+      return false;
+    }
+
+    const resObj = await res.json();
+    if (resObj.title === "No Definitions Found") {
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error("There has been a problem with your fetch operation:", error);
   }
-  return true;
-  //const word = getWord();
-  //isValidWord(word);
 }
 
 /**
@@ -64,12 +98,12 @@ function isLetter(letter) {
  * Submits the current row and disables it,
  * calls program to perform validation and enables the next row.
  */
-function submitRow() {
+async function submitRow() {
   // Store the current row before disabling it (to enable the next row later)
   const currentRow = getCurrentRow();
 
   // Validation Logic - Check if the current row is valid
-  if (!submitWord()) {
+  if (!await validate()) {
     return;
   }
 
@@ -260,6 +294,7 @@ async function getWordOfTheDay() {
       // Use the data here
       wordOfTheDay = data.word.toUpperCase();
       console.log(wordOfTheDay);
+      setLoading(false);
 
       return;
     })
@@ -272,19 +307,26 @@ async function getWordOfTheDay() {
 }
 
 async function getWordOfTheDayv2() {
-    try {
-        const response = await fetch("https://words.dev-apis.com/word-of-the-day");
-        if (!response.ok) {
-            throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        console.log(data);
-        // Use the data here
-        wordOfTheDay = data.word.toUpperCase();
-        console.log(wordOfTheDay);
-    } catch (error) {
-        console.error("There has been a problem with your fetch operation:", error);
+  try {
+    const response = await fetch("https://words.dev-apis.com/word-of-the-day");
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
     }
+    const data = await response.json();
+    console.log(data);
+    // Use the data here
+    wordOfTheDay = data.word.toUpperCase();
+    console.log(wordOfTheDay);
+    setLoading(false);
+  } catch (error) {
+    console.error("There has been a problem with your fetch operation:", error);
+  }
+}
+
+function setLoading(isLoadingBool) {
+  console.log("Loading: ", isLoadingBool);
+  //document.querySelector(".loader").style.display = isLoading ? "block" : "none";
+  document.querySelector(".loader").classList.toggle("hidden", !isLoadingBool);
 }
 
 /**
