@@ -1,0 +1,33 @@
+span h1 {
+  color: red;
+}
+
+h1 {
+  color: blue;
+  border-bottom: 0.1ch solid black;
+}
+
+p.paragraph {
+  color: green;
+}
+
+li {
+  list-style-type: square;
+}
+
+table {
+  border-style: dotted;
+  border-spacing: 20px;
+}
+
+a:hover {
+  color: red;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a {
+  color: blue;
+  font-size: 16px;
+  text-decoration: none;
+}

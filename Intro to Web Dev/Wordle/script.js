@@ -107,7 +107,7 @@ async function submitRow() {
     return;
   }
 
-  // Flip the tiles in the row
+  // Flip the tiles in the row and add colours
   flipRow(currentRow);
 
   // Add colour to the row
@@ -143,6 +143,11 @@ function flipRow(row) {
       tile.addEventListener("animationend", () => {
         tile.classList.remove("flip-in-animation");
         tile.classList.add("flip-out-animation");
+        //TODO: Add colour to the tile here
+        // tile.style.backgroundColor = "red";
+        // tile.style.color = "white";
+        // tile.style.border = "1px solid black";
+        // Depends on if character at index is correct
         tile.addEventListener("animationend", () => {
           tile.classList.remove("flip-out-animation");
         });
@@ -333,7 +338,6 @@ function setLoading(isLoadingBool) {
   infoBar.addEventListener("animationend", () => {
     infoBar.classList.remove("fade-out-animation");
     loader.classList.toggle("hidden", !isLoadingBool);
-
   });
 }
 
@@ -344,8 +348,8 @@ function setLoading(isLoadingBool) {
 let wordOfTheDay = "apple";
 async function init() {
   registerInputListeners();
-  refocusInput();
   registerCursorResetListener();
+  refocusInput();
 
   wordOfTheDay = await getWordOfTheDayv2();
   setLoading(false);
