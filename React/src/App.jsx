@@ -1,34 +1,36 @@
-const Pet = (props) => {
-  return React.createElement("div", {}, [
-    React.createElement("h1", {}, props.name),
-    React.createElement("h2", {}, props.animal),
-    React.createElement("h2", {}, props.breed),
-  ]);
-};
+import React from "react";
+import ReactDOM from "react-dom/client";
+import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import SearchParams from "./SearchParams";
+import Details from "./Details";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      cacheTime: 1000 * 60 * 30, // 30 minutes (could do Infinity, but this is more realistic for a pet app)
+    },
+  },
+});
 
 const App = () => {
-  return React.createElement("div", {}, [
-    React.createElement("h1", {}, "Adoption Page"),
-    React.createElement("p", {}, "Welcome to the adoption page!"),
-    React.createElement(
-      "button",
-      { onClick: () => alert("You clicked the button!") },
-      "Click me!",
-    ),
-    React.createElement(Pet, {
-      name: "Luna",
-      animal: "Dog",
-      breed: "Havanese",
-    }),
-    React.createElement(Pet, {
-      name: "Pepper",
-      animal: "Bird",
-      breed: "Cockatiel",
-    }),
-    React.createElement(Pet, { name: "Doink", animal: "Cat", breed: "Mixed" }),
-  ]);
+
+  return (
+    <BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <header>
+        <Link to="/">Adopt Me!</Link>
+      </header>
+      <Routes>
+        <Route path="/" element={<SearchParams />} />
+        <Route path="/details/:id" element={<Details />} />
+      </Routes>
+    </QueryClientProvider>
+    </BrowserRouter>
+  );
 };
 
 const container = document.getElementById("root"); // Get the root element
 const root = ReactDOM.createRoot(container); // Create a root
-root.render(React.createElement(App)); // Render the app (App component
+root.render(<App />); // Render the app (App component
