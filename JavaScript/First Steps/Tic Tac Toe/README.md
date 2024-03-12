@@ -15,7 +15,7 @@ This is a simple Tic Tac Toe game built with HTML, CSS and JavaScript.
      - Retrieve the square you want to play in
      - Set the square's text to your player's symbol
 
-![Tic Tac Toe - Gameplay](./assets/Gameplay.mp4)
+![Tic Tac Toe - Gameplay](./assets/Gameplay.gif)
 
 ## Usage Instructions
 
