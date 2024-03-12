@@ -1,5 +1,9 @@
 ## Let's play Tic Tac Toe!
 
+This is a simple Tic Tac Toe game built with HTML, CSS and JavaScript.
+
+![Tic Tac Toe](./assets/Game%20Board.png)
+
 1. Set up the players
 
 - Create a **players** array containing 2 objects, one representing each player
@@ -12,3 +16,11 @@
 - On each turn:
   - Retrieve the square you want to play in
   - Set the square's text to your player's symbol
+
+## Usage Instructions
+
+1. Clone the repository
+2. Open the `index.html` file in your browser
+3. Play the game!
+4. Refresh the page to play again
+5. Enjoy!
