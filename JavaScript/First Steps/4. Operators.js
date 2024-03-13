@@ -152,61 +152,6 @@
     // >> is a binary operator, it performs a bitwise right shift operation on the first operand by the number of bits specified by the second operand
     console.log(3 >> 1); // 1 (3 in binary is 11, so 3 >> 1 is 1, which is 1 in decimal)
 
-// typeof is a unary operator, it returns the type of the operand as a string
-    console.log(typeof 3); // "number"
-    console.log(typeof "3"); // "string"
-    console.log(typeof true); // "boolean"
-    console.log(typeof {}); // "object"
-    console.log(typeof []); // "object"
-    console.log(typeof null); // "object"
-    console.log(typeof undefined); // "undefined"
-    console.log(typeof function() {}); // "function"
-    console.log(typeof Symbol()); // "symbol"
-
-// Truthy and Falsy values
-// In JavaScript, a value is truthy if it converts to true when evaluated in a boolean context, and falsy if it converts to false.
-
-    // Falsy values include false, 0, "", null, undefined, and NaN
-    console.log(Boolean(false)); // false
-    console.log(Boolean(0)); // false
-    console.log(Boolean("")); // false
-    console.log(Boolean(null)); // false
-    console.log(Boolean(undefined)); // false
-    console.log(Boolean(NaN)); // false
-
-    // Everything else is truthy
-    console.log(Boolean(true)); // true
-    console.log(Boolean(1)); // true
-    console.log(Boolean("hello")); // true
-    console.log(Boolean({})); // true
-    console.log(Boolean([])); // true
-    console.log(Boolean(function() {})); // true
-    console.log(Boolean(Symbol())); // true
-
-    // Use the !! operator to convert a value to a boolean
-    console.log(!!"hello"); // true
-    console.log(!!0); // false
-
-    // Use Case
-    // You can use truthy and falsy values to write more concise code.
-    // Instead of writing:
-    let name = "John";
-    if (name !== "") {
-      console.log("Hello, " + name + "!");
-    }
-    // You can write:
-    if (name) {
-      console.log("Hello, " + name + "!");
-    }
-    // Instead of writing:
-    let count = 0;
-    if (count === 0) {
-      console.log("There are no items.");
-    }
-    // You can write:
-    if (!count) {
-      console.log("There are no items.");
-    }
 
 // Short-circuit evaluation
 // In JavaScript, the && and || operators use short-circuit evaluation.

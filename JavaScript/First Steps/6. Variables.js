@@ -10,7 +10,7 @@ console.log(remember);
 // Declaring a variable
 let bankrupcy; // Because we haven't assigned a value to the variable, it's value is equal to undefined
 
-// Assigning a value to a variable
+// Assigning a value to a variable (also known as initializing a variable)
 bankrupcy = "I'm broke! I have no money!";
 console.log(bankrupcy);
 
