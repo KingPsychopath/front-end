@@ -81,7 +81,7 @@ sayHello(); // Hello
 const hm = sayHello("Marc"); // undefined
 
 
-//                                          Function Expressions
+//                                  Function Expressions and Anonymous Functions (First-Class Functions)
 // Functions can be stored in variables (Functions are first-class citizens so they can be treated like any other value)
 // This is called a function expression
 const myFunction = function() {
@@ -128,7 +128,7 @@ callTwice(rollDie); // 4 1
 callTenTimes(rollDie); // 3 5 2 6 1 4 1 6 3 2
 
 
-//                                         Functions as Return Values (Higher Order Functions)
+//                                  Functions as Return Values (Higher Order Functions)
 
 // Functions can also return other functions
 function makeMysteryFunc() {

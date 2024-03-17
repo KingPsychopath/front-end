@@ -1,4 +1,4 @@
-// + operates is a binary operator, it takes two operands and returns a single value (operand1 + operand2)
+//           + operates is a binary operator, it takes two operands and returns a single value (operand1 + operand2)
         // when operating on strings it concatenates them
         console.log("Hello " + "World"); // "HelloWorld"
 
@@ -20,7 +20,8 @@
         // when operating on null or undefined it returns NaN
         console.log(null + undefined); // NaN
 
-// Arithmetic operators include +, -, *, /, %, ++, and --. (They are binary operators, except for ++ and -- which are unary operators.)
+//                                  Arithmetic operators include +, -, *, /, %, ++, and --.
+//                   (They are binary operators, except for ++ and -- which are unary operators.)
 
     // - is a binary operator, it subtracts the second operand from the first
     console.log(3 - 2); // 1
@@ -50,7 +51,7 @@
     // 5. Left to right
 
 
-// Comparison operators include ==, ===, !=, !==, >, <, >=, and <=. (They are binary operators.)
+//                     Comparison operators include ==, ===, !=, !==, >, <, >=, and <=. (They are binary operators.)
 
     // == is a binary operator, it checks if the two operands are equal (it does type coercion)
     console.log(3 == 3); // true
@@ -94,7 +95,7 @@
     console.log(!true); // false (inverse of true)
     console.log(!false); // true (inverse of false)
 
-// Assignment operators include =, +=, -=, *=, /=, and %=.
+//                                        Assignment operators include =, +=, -=, *=, /=, and %=.
 
     // = is a binary operator, it assigns the value of the right operand to the left operand
     let z = 3;
@@ -125,7 +126,9 @@
     e %= 2; // equivalent to e = e % 2
     console.log(e); // 1
 
-// Bitwise operators include &, |, ^, ~, <<, and >>.
+
+
+//                                          Bitwise operators include &, |, ^, ~, <<, and >>.
 
     // & is a binary operator, it performs a bitwise AND operation on the two operands
     console.log(3 & 2); // 2 (3 in binary is 11, and 2 in binary is 10, so 11 & 10 is 10, which is 2 in decimal)
