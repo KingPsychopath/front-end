@@ -129,6 +129,9 @@ callTenTimes(rollDie); // 3 5 2 6 1 4 1 6 3 2
 
 
 //                                  Functions as Return Values (Higher Order Functions)
+// High Order Functions are functions that operate on/with other functions (term from Mathematics)
+// They can accept other functions as arguments and return a function or both
+// The ability to treat functions as values, and pass them around is a key feature of Functional Programming
 
 // Functions can also return other functions
 function makeMysteryFunc() {
@@ -161,6 +164,16 @@ console.log(isChild(5)); // true
 console.log(isAdult(5)); // false
 console.log(isSenior(5)); // false
 
+// setTimeout(): This function takes a function as an argument and calls it after a specified delay.
+setTimeout(() => {
+  console.log('This message is displayed after 2 seconds.');
+}, 2000);
+
+// Array.prototype.map(): This function takes a function as an argument and applies it to every element in an array.
+const numbers = [1, 2, 3, 4, 5];
+const squares = numbers.map(number => number * number);
+console.log(squares);  // Outputs: [1, 4, 9, 16, 25]
+
 //                                            Methods vs Functions
 
 // Methods are functions that are stored as object properties
@@ -191,6 +204,8 @@ myObj2.sayHello = function() {
 };
 myObj2.sayHello(); // Hello
 
+
+//                                           Prototype Methods
 // Methods can also be added to the prototype of an object
 // This is a way to add methods to all instances of an object
 

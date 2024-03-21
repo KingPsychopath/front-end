@@ -182,4 +182,24 @@
     let greeting3 = name3 && "Hello, " + name3 + "!" || "Hello, world!";
     console.log(greeting3); // "Hello, John!"
 
+//                                                   Spread Operator
+// The spread operator (...) allows us to expand an array into its individual elements.
+
+// It takes all the items in an array and "spreads" them out into individual arguments.
+const numbers3 = [1, 2, 3];
+console.log(...numbers3); // 1 2 3
+console.log(numbers3) // [1, 2, 3]
+
+const oldBurns = ["square", "wack"];
+const newBurns = ["basic", "dusty", "sus"];
+const burnBook = [...oldBurns, ...newBurns]; // ["square", "wack", "basic", "dusty", "sus"]
+
+// Equivalent to:
+const burnBook = oldBurns.concat(newBurns); // ["square", "wack", "basic", "dusty", "sus"]
+
+// We can also use it to pass all the items in an array as arguments to a function.
+const skills = ["HTML", "CSS", "JS"];
+const newSkills = ["React", "TypeScript", "Node"];
+skills.push(...newSkills); // ["HTML", "CSS", "JS", "React", "TypeScript", "Node"]
+console.log(...skills); // HTML CSS JS React TypeScript Node
 

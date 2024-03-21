@@ -128,7 +128,7 @@ const users = {
 };
 console.log(users); // { user1: { name: 'John', age: 30 }, user2: { name: 'Jane', age: 25 } }
 
-// Objects in Arrays & Objects
+//                                              Objects in Arrays & Objects
 const spices = [
   { name: "Emma", nickname: "Baby" },
   { name: "Geri", nickname: "Ginger" },
@@ -144,6 +144,8 @@ const spiceGirls = {
 spiceGirls.members[0].name; // "Emma"
 spiceGirls.members[1].nickname; // "Ginger"
 
+
+//                                                            Exercises
 /* From the spiceGirls object, how can we retrieve:
 
 1. "Girl Power"
@@ -162,7 +164,7 @@ spiceGirls.albums[1]; // "Spiceworld"
 spiceGirls.members[4].name; // "Victoria"
 spiceGirls.members[4]["name"]; // Both are valid.
 
-// Built-in Object Methods
+//                                                Built-in Object Methods
 // Objects have built-in methods that allow us to perform common tasks.
 
 // Object - a built-in object that has properties and methods for creating and manipulating objects.
@@ -255,7 +257,10 @@ const userPrefs = {
   theme: "light",
   fontSize: 14,
 };
-Object.assign({}, defaults, userPrefs); // { theme: 'light', fontSize: 14 }
+// Parameters (target, ...sources)
+// userPrefs is last so it will overwrite any properties with the same name in defaults in the target object.
+const newPrefs = Object.assign({}, defaults, userPrefs);
+console.log(newPrefs); // { theme: 'light', fontSize: 14 }  (newPrefs is a new object)
 
 // Object.freeze() - freezes an object: other code can't delete or change any properties.
 const frozen = Object.freeze({ name: "John" });

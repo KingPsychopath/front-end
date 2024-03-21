@@ -109,12 +109,14 @@
     function getMultipleChoices(n, correctAnswer, array) {
         // Use a while loop and the getRandomElement() function
         // Make sure there are no duplicates in the array
-        let choices = [];
-        choices.add(correctAnswer);
+        const choices = [correctAnswer];
         while (choices.length < n) {
-            // Add a random element from the array to choices
-            choices.add(getRandomElement(array));
+            let candidate = getRandomElement(array);
+            if (choices.indexOf(candidate) < 0) { // check if this is already in the array
+                choices.push(candidate); // if not, add it
+            }
         }
+        return shuffleArray(choices);
     }
 
 
@@ -123,13 +125,13 @@
     // return the breed name string as formatted in the breed list, e.g. "standard poodle"
     function getBreedFromURL(url) {
         // The string method .split(char) may come in handy
-        let parts = url.split("/"); // ["https:", "", "images.dog.ceo", "breeds", "poodle-standard", "n02113799_2280.jpg"]
-        let breedList = parts[4].split("-"); // ["poodle", "standard"]
-
-        //let breed = parts[4].split("-").join(" "); // "poodle standard"
         // Try to use destructuring as much as you can
-        const [breed, subBreed] = breedList; // "poodle", "standard"
-        return `${subBreed} ${breed}`;
+        const [, path] = url.split("/breeds/"); // Split the URL at the "/breeds/" part
+        // Output: [ 'https://images.dog.ceo', 'poodle-standard/n02113799_2280.jpg' ]
+        const [breedID] = path.split("/"); // Split the path at the next "/" to get the breed ID
+        // Output: ["poodle", "standard"]
+        const [breed, subtype] = breedID.split("-");
+        return [subtype, breed].join(" ");
     }
 
 
@@ -139,7 +141,9 @@
     // then parse the response as a JSON object,
     // finally return the "message" property of its body
     async function fetchMessage(url) {
-
+        const response = await fetch(url);  // Fetch the resource at the given URL
+        const { message } = await response.json(); // Parse the response as JSON & remember its 'message' value
+        return message; // Return the message
     }
 
 
@@ -164,7 +168,12 @@
         // Create a button element whose name, value, and textContent properties are the value of that choice,
         // attach a "click" event listener with the buttonHandler function,
         // and append the button as a child of the options element
-
+        choicesArray.map(choice => {
+            let button = document.createElement("button");
+            button.value = button.name = button.textContent = choice;
+            button.addEventListener("click", buttonHandler);
+            options.appendChild(button);
+        })
     }
 
 
@@ -196,7 +205,8 @@
     // TODO 5
     // Asynchronously call the loadQuizData() function,
     // Then call renderQuiz() with the returned imageUrl, correctAnswer, and choices
-
+    const [imageUrl, correctAnswer, choices] = await loadQuizData();
+    renderQuiz(imageUrl, correctAnswer, choices);
 
 
 

@@ -93,3 +93,8 @@ for (let key in obj2) {
 // Use the for...of loop instead.
 
 // The for...in is usually used for iterating enurmerable properties of an object.
+
+// Enumerable means that something can be counted or listed one by one.
+// In JavaScript, when we say a property is enumerable, 
+// it means we can include it in a list or a loop to look at each item individually.
+// It's like having a bag of toys and being able to take each one out to look at it.

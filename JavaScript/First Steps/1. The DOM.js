@@ -132,6 +132,17 @@ document.body.textContent = "New Content"; // Changes the content of the body of
 document.body.className = "newClass"; // Changes the class of the body of the document to newClass
 document.body.id = "newId"; // Changes the id of the body of the document to newId
 
+// Changing classes of an element
+document.getElementById("content").classList.add("newClass"); // Adds a class to the element with the specified id
+document.getElementById("content").classList.remove("oldClass"); // Removes a class from the element with the specified id
+document.getElementById("content").classList.toggle("newClass"); // Toggles a class for the element with the specified id
+
+// Changing styles of an element
+document.getElementById("content").style.backgroundColor = "red"; // Changes the background color of the element with the specified id to red
+document.getElementById("content").style.color = "blue"; // Changes the color of the element with the specified id to blue
+document.getElementById("content").style.fontSize = "20px"; // Changes the font size of the element with the specified id to 20px
+
+
 // Changing the content of an element
 document.getElementById("content").textContent = "New Content"; // Changes the content of the element with the specified id
 document.getElementById("content").className = "newClass"; // Changes the class of the element with the specified id to newClass

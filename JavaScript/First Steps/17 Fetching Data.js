@@ -74,6 +74,8 @@ async function fetchData2() {
 
 //                                                        Destructuring
 // Now we have to use the Data we got from the URL
+// Destructuring in JavaScript utilizes the enumerable properties of arrays and objects,
+// assigning corresponding properties or indices to variables
 
 //                                                  Destructuring  Objects
 // De-structuring is a way to unpack values from arrays, or properties from objects, into distinct variables.
@@ -221,7 +223,6 @@ promise3
   .catch((error) => console.log(error))
   .finally(() => console.log("The promise is settled.")); // Logs "The promise is settled."
 
-
 //                                                      Exercise
 /* Follow TODO 2 to complete the getBreedFromURL function with destructuring
 
@@ -246,3 +247,15 @@ function getBreedFromURL(url) {
   const [breed, subBreed] = breedList; // "poodle", "standard"
   return `${subBreed} ${breed}`;
 }
+
+// TODO 3
+// Given a URL, fetch the resource at that URL,
+// then parse the response as a JSON object,
+// finally return the "message" property of its body
+async function fetchMessage(url) {
+  let response = await fetch(url);
+  let data = await response.json();
+  return ({ message } = data);
+}
+
+

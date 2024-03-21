@@ -56,6 +56,7 @@ console.log(endInY); // [{name: "Mel C", nickname: "Sporty"}]
 // It takes all the items in an array and "spreads" them out into individual arguments.
 const numbers3 = [1, 2, 3];
 console.log(...numbers3); // 1 2 3
+console.log(numbers3) // [1, 2, 3]
 
 const oldBurns = ["square", "wack"];
 const newBurns = ["basic", "dusty", "sus"];

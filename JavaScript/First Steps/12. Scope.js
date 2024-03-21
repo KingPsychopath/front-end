@@ -132,6 +132,19 @@ function getBalance() {
   console.log(message); // ReferenceError: message is not defined
 }
 
+//                                      Loops
+// Loops do not create new execution contexts or closures.
+// They only create new block scopes.
+
+// As of ES6 we can use let and const to create block scoped variables.
+// This means that if you declare a variable inside a block,
+// it will only be available within that iteration of said block.
+for (let i = 0; i < 5; i++) {
+  let x = i * 2;
+  console.log(x); // x is accessible here
+}
+console.log(x); // Error: x is not defined
+
 // In Summary, use let and const instead of var. They are block scoped, and help prevent bugs.
 // This is especially important when working with loops, and if statements.
 // It gives you more control over variable scope and re-assignment.
