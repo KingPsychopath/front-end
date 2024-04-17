@@ -31,6 +31,7 @@ higherOrderFunction(callback); // Output: Higher Order Function, Callback
 // This enables functions like map, filter, reduce, sort, find, forEach, etc.
 // Here we pass in an array and a function that multiplies each number by 2.
 map([1, 2, 3], (num) => num * 2); // [2, 4, 6]
+
 // map is a function that takes in an array and a callback function.
 // The callback function is the logic that we want to run on each element of the array.
 // It returns a new array with the results of the callback function.

@@ -13,7 +13,7 @@ console.log("I'll never get here");
 // Or if it was optional, just skip it and move on with our (program's) lives
 
 // try lets us "watch out" for potential errors
-// its friend catch lets us manage errors when they occur
+// its friend catch lets us manage errors when they occur¬
 // and finally lets us run code after the try and catch, no matter what's happened
 try {
   thisMightThrowAnError();

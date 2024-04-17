@@ -15,7 +15,7 @@ bankrupcy = "I'm broke! I have no money!";
 console.log(bankrupcy);
 
 // let and const differ in that let allows reassignment, while const does not.
-// const is short for constant, it declares & assigins a variable forever.
+// const is short for constant, it declares & assigns a variable forever.
 const rickroll = "Never gonna give you up!"; // You have to declare and assign a value to a const at the same time.
 console.log(rickroll);
 
