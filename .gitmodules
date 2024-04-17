@@ -1,0 +1,6 @@
+[submodule "CSS/Foundations/Project/fem-css-foundations"]
+	path = CSS/Foundations/Project/fem-css-foundations
+	url = https://github.com/KingPsychopath/fem-css-foundations.git
+[submodule "CSS/Foundations/fem-css-foundations"]
+	path = CSS/Foundations/fem-css-foundations
+	url = https://github.com/KingPsychopath/fem-css-foundations.git
